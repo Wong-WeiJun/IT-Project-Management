@@ -1,9 +1,12 @@
 # IT-Project-Management
-Rough Project Structure
+
+## Rough Project Structure
+
+```text
 IT-Project-Management/
 ├── README.md
 ├── meetings/
-│   ├── Group_Checklist.docx
+│   └── Group_Checklist.docx
 ├── project-management/
 │   ├── business-case/
 │   ├── charter/
@@ -17,3 +20,4 @@ IT-Project-Management/
 └── evidence/
     ├── screenshots/
     └── testing/
+```
