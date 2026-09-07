@@ -8,13 +8,7 @@ IT-Project-Management/
 ├── meetings/
 │   └── Group_Checklist.docx
 ├── project-management/
-│   ├── business-case/
-│   ├── charter/
-│   ├── scope/
-│   ├── wbs/
-│   ├── schedule/
-│   ├── risks/
-│   └── change-management/
+│   ├── xxx
 ├── prototype/
 ├── ui/
 └── evidence/
