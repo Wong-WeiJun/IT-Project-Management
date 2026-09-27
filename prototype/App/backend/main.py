@@ -1,4 +1,6 @@
 from fastapi import FastAPI, APIRouter, Depends
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 from sqlalchemy.orm import Session
 from database import get_db, Base, engine
@@ -20,10 +22,22 @@ app = FastAPI(
 
 app.include_router(incidents.router)
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 @app.get("/")
 def home():
-    return {"message": "Welcome to the Glizzy Emergency Support Coordination System!"}
+    return FileResponse("templates/incidents.html")
+
+
+@app.get("/incidents.html")
+def incidents_page():
+    return FileResponse("templates/incidents.html")
+
+
+@app.get("/incidents_detail.html")
+def incident_detail_page():
+    return FileResponse("templates/incidents_detail.html")
 
 
 @app.get("/health")
