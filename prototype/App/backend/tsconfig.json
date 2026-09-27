@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["ES2017", "DOM"],
+    "outDir": "static/js",
+    "rootDir": "static/ts",
+    "strict": false
+  },
+  "include": ["static/ts/**/*.ts"]
+}
