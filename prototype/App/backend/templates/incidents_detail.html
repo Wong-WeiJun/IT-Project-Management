@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Incident Detail</title>
+  <style>
+    #view-section p { margin: 0.4rem 0; }
+    #edit-section {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid;
+      max-width: 400px;
+    }
+    #edit-section label { display: block; margin-top: 0.5rem; }
+    #edit-section input,
+    #edit-section select,
+    #edit-section textarea { width: 100%; padding: 0.3rem; box-sizing: border-box; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; margin-right: 0.5rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <p><a href="/incidents.html">&larr; Back to Incidents</a></p>
+
+  <div id="incident-detail">
+    <div id="view-section">
+      <h1 id="detail-title"></h1>
+      <p><strong>Description:</strong> <span id="detail-description"></span></p>
+      <p><strong>Location:</strong> <span id="detail-location"></span></p>
+      <p><strong>Severity:</strong> <span id="detail-severity"></span></p>
+      <p><strong>Status:</strong> <span id="detail-status"></span></p>
+      <p><strong>Created:</strong> <span id="detail-created"></span></p>
+
+      <button id="edit-btn">Edit</button>
+      <button id="resolve-btn">Mark Resolved</button>
+    </div>
+
+    <div id="edit-section">
+      <h2>Edit Incident</h2>
+      <form id="edit-form">
+        <label for="edit-title">Title</label>
+        <input type="text" id="edit-title" required>
+
+        <label for="edit-description">Description</label>
+        <textarea id="edit-description" required></textarea>
+
+        <label for="edit-location">Location</label>
+        <input type="text" id="edit-location" required>
+
+        <label for="edit-severity">Severity</label>
+        <select id="edit-severity">
+          <option value="LOW">LOW</option>
+          <option value="MEDIUM">MEDIUM</option>
+          <option value="HIGH">HIGH</option>
+        </select>
+
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/js/incidents.js"></script>
+</body>
+</html>
