@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Incidents</title>
+  <title>Requests</title>
   <style>
     table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
     th, td { border: 1px solid; padding: 0.5rem; text-align: left; }
@@ -25,13 +25,16 @@
   <button id="show-form-btn">+ Make Request</button>
 
   <div id="create-form-section">
-    <h2>Register Incident</h2>
+    <h2>Make Request</h2>
     <form id="create-form">
       <label for="incident">Incident</label>
-      <input type="text" id="incident" required>
+      <select id="incident" required></select>
 
       <label for="requester">Requester</label>
       <input type="text" id="requester" required>
+
+      <label for="contact">Requester Contact</label>
+      <input type="text" id="contact" required>
 
       <label for="description">Description</label>
       <textarea id="description" required></textarea>
@@ -59,6 +62,7 @@
         <th>Priority</th>
         <th>Status</th>
         <th>Incident</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody id="request-list">
