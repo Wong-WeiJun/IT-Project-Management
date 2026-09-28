@@ -77,6 +77,10 @@ async function updateIncident(e) {
 if (document.getElementById("incident-list")) {
     loadIncidents();
     document.getElementById("create-form").addEventListener("submit", createIncident);
+    document.getElementById("show-form-btn").addEventListener("click", () => {
+        const section = document.getElementById("create-form-section");
+        section.style.display = section.style.display === "block" ? "none" : "block";
+    });
 }
 if (document.getElementById("incident-detail")) {
     loadDetail();
