@@ -46,7 +46,7 @@ class RequestBase(BaseModel):
 
 
 class RequestCreate(RequestBase):
-    pass
+    incident_id: str
 
 
 class RequestUpdate(BaseModel):
