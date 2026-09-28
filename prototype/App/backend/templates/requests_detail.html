@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Request Detail</title>
+  <style>
+    #view-section p { margin: 0.4rem 0; }
+    #edit-section {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid;
+      max-width: 400px;
+    }
+    #edit-section label { display: block; margin-top: 0.5rem; }
+    #edit-section input,
+    #edit-section select,
+    #edit-section textarea { width: 100%; padding: 0.3rem; box-sizing: border-box; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; margin-right: 0.5rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <p><a href="/requests.html">&larr; Back to Requests</a></p>
+
+  <div id="request-detail">
+    <div id="view-section">
+      <h1 id="detail-requester"></h1>
+      <p><strong>Contact:</strong> <span id="detail-contact"></span></p>
+      <p><strong>Location:</strong> <span id="detail-location"></span></p>
+      <p><strong>Description:</strong> <span id="detail-description"></span></p>
+      <p><strong>Priority:</strong> <span id="detail-priority"></span></p>
+      <p><strong>Status:</strong> <span id="detail-status"></span></p>
+      <p><strong>Incident ID:</strong> <span id="detail-incident-id"></span></p>
+      <p><strong>Created:</strong> <span id="detail-created"></span></p>
+
+      <button id="edit-btn">Edit</button>
+      <button id="resolve-btn">Mark Resolved</button>
+    </div>
+
+    <div id="edit-section">
+      <h2>Edit Request</h2>
+      <form id="edit-form">
+        <label for="edit-requester-name">Requester Name</label>
+        <input type="text" id="edit-requester-name" required>
+
+        <label for="edit-requester-contact">Contact</label>
+        <input type="text" id="edit-requester-contact" required>
+
+        <label for="edit-location">Location</label>
+        <input type="text" id="edit-location" required>
+
+        <label for="edit-description">Description</label>
+        <textarea id="edit-description" required></textarea>
+
+        <label for="edit-priority">Priority</label>
+        <select id="edit-priority">
+          <option value="LOW">LOW</option>
+          <option value="MEDIUM">MEDIUM</option>
+          <option value="HIGH">HIGH</option>
+        </select>
+
+        <label for="edit-status">Status</label>
+        <select id="edit-status">
+          <option value="OPEN">OPEN</option>
+          <option value="IN_PROGRESS">IN_PROGRESS</option>
+          <option value="RESOLVED">RESOLVED</option>
+        </select>
+
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/js/request-detail.js"></script>
+</body>
+</html>
