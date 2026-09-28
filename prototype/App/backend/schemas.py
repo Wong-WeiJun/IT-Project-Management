@@ -35,3 +35,34 @@ class IncidentResponse(IncidentBase):
     updated_at: datetime = Field(default_factory=get_datetime)
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class RequestBase(BaseModel):
+    requester_name: str
+    requester_contact: str
+    location: str
+    description: str
+    priority: Literal["LOW", "MEDIUM", "HIGH"] = "LOW"
+
+
+class RequestCreate(RequestBase):
+    pass
+
+
+class RequestUpdate(BaseModel):
+    requester_name: Optional[str] = None
+    requester_contact: Optional[str] = None
+    location: Optional[str] = None
+    description: Optional[str] = None
+    priority: Optional[Literal["LOW", "MEDIUM", "HIGH"]] = None
+    status: Optional[Literal["OPEN", "IN_PROGRESS", "RESOLVED"]] = None
+
+
+class RequestResponse(RequestBase):
+    id: str
+    incident_id: str
+    status: Literal["OPEN", "IN_PROGRESS", "RESOLVED"]
+    created_at: datetime
+    updated_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
