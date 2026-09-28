@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Incidents</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid; padding: 0.5rem; text-align: left; }
+    #create-form-section {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid;
+      max-width: 400px;
+    }
+    #create-form-section label { display: block; margin-top: 0.5rem; }
+    #create-form-section input,
+    #create-form-section select,
+    #create-form-section textarea { width: 100%; padding: 0.3rem; box-sizing: border-box; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Requests</h1>
+
+  <button id="show-form-btn">+ Make Request</button>
+
+  <div id="create-form-section">
+    <h2>Register Incident</h2>
+    <form id="create-form">
+      <label for="incident">Incident</label>
+      <input type="text" id="incident" required>
+
+      <label for="requester">Requester</label>
+      <input type="text" id="requester" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" required></textarea>
+
+      <label for="location">Location</label>
+      <input type="text" id="location" required>
+
+      <label for="priority">Priority</label>
+      <select id="priority">
+        <option value="LOW">LOW</option>
+        <option value="MEDIUM">MEDIUM</option>
+        <option value="HIGH">HIGH</option>
+      </select>
+
+      <button type="submit">Submit Request</button>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Incident</th>
+      </tr>
+    </thead>
+    <tbody id="request-list">
+    </tbody>
+  </table>
+
+  <script src="/static/js/requests.js"></script>
+</body>
+</html>
