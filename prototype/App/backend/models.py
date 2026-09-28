@@ -54,3 +54,4 @@ class Request(Base):
         onupdate=get_datetime,
         nullable=False,
     )
+    incident = relationship("Incident", back_populates="requests")
