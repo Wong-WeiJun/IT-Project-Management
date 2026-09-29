@@ -66,3 +66,32 @@ class RequestResponse(RequestBase):
     updated_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class PersonnelBase(BaseModel):
+    name: str
+    role: Optional[
+        Literal["Medical", "Search & Rescue", "Volunteer", "Coordinator"]
+    ] = None
+    contact: str
+
+
+class PersonnelCreate(PersonnelBase):
+    assigned_incident_id: Optional[str] = None
+
+
+class PersonnelUpdate(BaseModel):
+    name: Optional[str] = None
+    role: Optional[
+        Literal["Medical", "Search & Rescue", "Volunteer", "Coordinator"]
+    ] = None
+    contact: Optional[str] = None
+    status: Optional[Literal["AVAILABLE", "ASSIGNED", "UNAVAILABLE"]] = None
+    assigned_incident_id: Optional[str] = None
+
+
+class PersonnelResponse(PersonnelBase):
+    id: str
+    status: Literal["AVAILABLE", "ASSIGNED", "UNAVAILABLE"]
+    assigned_incident_id: Optional[str] = None
+    incident_title: Optional[str] = None
