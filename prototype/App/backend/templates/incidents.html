@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Incidents</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid; padding: 0.5rem; text-align: left; }
+    #create-form-section {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid;
+      max-width: 400px;
+    }
+    #create-form-section label { display: block; margin-top: 0.5rem; }
+    #create-form-section input,
+    #create-form-section select,
+    #create-form-section textarea { width: 100%; padding: 0.3rem; box-sizing: border-box; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Incidents</h1>
+
+  <button id="show-form-btn">+ Register Incident</button>
+
+  <div id="create-form-section">
+    <h2>Register Incident</h2>
+    <form id="create-form">
+      <label for="title">Title</label>
+      <input type="text" id="title" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" required></textarea>
+
+      <label for="location">Location</label>
+      <input type="text" id="location" required>
+
+      <label for="severity">Severity</label>
+      <select id="severity">
+        <option value="LOW">LOW</option>
+        <option value="MEDIUM">MEDIUM</option>
+        <option value="HIGH">HIGH</option>
+      </select>
+
+      <button type="submit">Register Incident</button>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Severity</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="incident-list">
+    </tbody>
+  </table>
+
+  <script src="/static/js/incidents.js"></script>
+</body>
+</html>
