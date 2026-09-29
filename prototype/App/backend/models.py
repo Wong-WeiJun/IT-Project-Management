@@ -55,3 +55,18 @@ class Request(Base):
         nullable=False,
     )
     incident = relationship("Incident", back_populates="requests")
+
+
+class Personnel(Base):
+    __tablename__ = "personnel"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    name = Column(String, nullable=False)
+    contact = Column(String, nullable=False)
+    role = Column(String, nullable=False)
+    assigned_incident_id = Column(
+        String, ForeignKey("incidents.id", ondelete="CASCADE"), nullable=True
+    )
+    status = Column(String, default="AVAILABLE", nullable=False)
+
+    incident = relationship("Incident", back_populates="personnel")
