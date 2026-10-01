@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Personnel</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid; padding: 0.5rem; text-align: left; }
+    #create-form-section {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid;
+      max-width: 400px;
+    }
+    #create-form-section label { display: block; margin-top: 0.5rem; }
+    #create-form-section input,
+    #create-form-section select,
+    #create-form-section textarea { width: 100%; padding: 0.3rem; box-sizing: border-box; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Personnel</h1>
+
+  <button id="show-form-btn">+ Add Personnel</button>
+
+  <div id="create-form-section">
+    <h2>Add Personnel</h2>
+    <form id="create-form">
+      <label for="name">Name</label>
+      <input type="text" id="name" required>
+
+      <label for="role">Role</label>
+      <select id="role" required>
+        <option value="Medical">Medical</option>
+        <option value="Search & Rescue">Search & Rescue</option>
+        <option value="Fire Response">Fire Response</option>
+        <option value="Logistics">Logistics</option>
+        <option value="Volunteer">Volunteer</option>
+        <option value="Coordinator">Coordinator</option>
+      </select>
+
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" required>
+
+      <label for="assigned_incident_id">Assigned Incident ID (Optional)</label>
+      <input type="text" id="assigned_incident_id" placeholder="Leave blank if unassigned">
+
+      <button type="submit">Add Personnel</button>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Incident</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="personnel-list">
+    </tbody>
+  </table>
+
+  <script src="/static/js/personnel.js"></script>
+</body>
+</html>

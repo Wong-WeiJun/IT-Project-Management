@@ -32,6 +32,7 @@ class Incident(Base):
     requests = relationship(
         "Request", back_populates="incident", cascade="all, delete-orphan"
     )
+    personnel = relationship("Personnel", back_populates="incident")
 
 
 class Request(Base):
