@@ -5,18 +5,22 @@
   <title>Incident Detail</title>
   <style>
     #view-section p { margin: 0.4rem 0; }
-    #edit-section {
+    #edit-section, #assign-personnel-section {
       display: none;
       margin-top: 1rem;
       padding: 1rem;
       border: 1px solid;
       max-width: 400px;
     }
-    #edit-section label { display: block; margin-top: 0.5rem; }
+    #edit-section label, #assign-personnel-section label { display: block; margin-top: 0.5rem; }
     #edit-section input,
     #edit-section select,
-    #edit-section textarea { width: 100%; padding: 0.3rem; box-sizing: border-box; }
+    #edit-section textarea,
+    #assign-personnel-section select { width: 100%; padding: 0.3rem; box-sizing: border-box; }
     button { padding: 0.5rem 1rem; margin-top: 1rem; margin-right: 0.5rem; cursor: pointer; }
+    
+    .personnel-section { margin-top: 2rem; border-top: 1px solid; padding-top: 1rem; }
+    ul#assigned-personnel-list { padding-left: 1.2rem; }
   </style>
 </head>
 <body>
@@ -33,6 +37,27 @@
 
       <button id="edit-btn">Edit</button>
       <button id="resolve-btn">Mark Resolved</button>
+      <button id="assign-btn">+ Assign Personnel</button>
+
+      <div class="personnel-section">
+        <h3>Assigned Personnel</h3>
+        <ul id="assigned-personnel-list">
+          <!-- js -->
+        </ul>
+      </div>
+    </div>
+
+    <div id="assign-personnel-section">
+      <h2>Assign Personnel</h2>
+      <form id="assign-personnel-form">
+        <label for="personnel-select">Select Available Personnel</label>
+        <select id="personnel-select" required>
+          <option value="">-- Select Personnel --</option>
+          <!-- js -->
+        </select>
+
+        <button type="submit">Assign to Incident</button>
+      </form>
     </div>
 
     <div id="edit-section">
