@@ -70,9 +70,14 @@ class RequestResponse(RequestBase):
 
 class PersonnelBase(BaseModel):
     name: str
-    role: Optional[
-        Literal["Medical", "Search & Rescue", "Volunteer", "Coordinator"]
-    ] = None
+    role: Literal[
+        "Medical",
+        "Search & Rescue",
+        "Fire Response",
+        "Logistics",
+        "Volunteer",
+        "Coordinator",
+    ]
     contact: str
 
 
@@ -83,7 +88,14 @@ class PersonnelCreate(PersonnelBase):
 class PersonnelUpdate(BaseModel):
     name: Optional[str] = None
     role: Optional[
-        Literal["Medical", "Search & Rescue", "Volunteer", "Coordinator"]
+        Literal[
+            "Medical",
+            "Search & Rescue",
+            "Fire Response",
+            "Logistics",
+            "Volunteer",
+            "Coordinator",
+        ]
     ] = None
     contact: Optional[str] = None
     status: Optional[Literal["AVAILABLE", "ASSIGNED", "UNAVAILABLE"]] = None
@@ -95,3 +107,5 @@ class PersonnelResponse(PersonnelBase):
     status: Literal["AVAILABLE", "ASSIGNED", "UNAVAILABLE"]
     assigned_incident_id: Optional[str] = None
     incident_title: Optional[str] = None
+
+    model_config = ConfigDict(from_attributes=True)
