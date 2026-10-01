@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Personnel Detail</title>
+  <style>
+    #view-section p { margin: 0.4rem 0; }
+    #edit-section {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid;
+      max-width: 400px;
+    }
+    #edit-section label { display: block; margin-top: 0.5rem; }
+    #edit-section input,
+    #edit-section select,
+    #edit-section textarea { width: 100%; padding: 0.3rem; box-sizing: border-box; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; margin-right: 0.5rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <p><a href="/personnel.html">&larr; Back to Personnel</a></p>
+
+  <div id="personnel-detail">
+    <div id="view-section">
+      <h1 id="detail-name"></h1>
+      <p><strong>Role:</strong> <span id="detail-role"></span></p>
+      <p><strong>Contact:</strong> <span id="detail-contact"></span></p>
+      <p><strong>Status:</strong> <span id="detail-status"></span></p>
+      <p><strong>Assigned Incident:</strong> <span id="detail-incident"></span></p>
+
+      <button id="edit-btn">Edit</button>
+      <button id="unavailable-btn">Mark Unavailable</button>
+    </div>
+
+    <div id="edit-section">
+      <h2>Edit Personnel</h2>
+      <form id="edit-form">
+        <label for="edit-name">Name</label>
+        <input type="text" id="edit-name" required>
+
+        <label for="edit-role">Role</label>
+        <select id="edit-role">
+          <option value="Medical">Medical</option>
+          <option value="Search & Rescue">Search & Rescue</option>
+          <option value="Fire Response">Fire Response</option>
+          <option value="Logistics">Logistics</option>
+          <option value="Volunteer">Volunteer</option>
+          <option value="Coordinator">Coordinator</option>
+        </select>
+
+        <label for="edit-contact">Contact</label>
+        <input type="text" id="edit-contact" required>
+
+        <label for="edit-status">Status</label>
+        <select id="edit-status">
+          <option value="AVAILABLE">AVAILABLE</option>
+          <option value="ASSIGNED">ASSIGNED</option>
+          <option value="UNAVAILABLE">UNAVAILABLE</option>
+        </select>
+
+        <label for="edit-assigned-incident-id">Assigned Incident</label>
+        <select id="edit-assigned-incident-id"></select>
+
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/js/personnel.js"></script>
+</body>
+</html>
