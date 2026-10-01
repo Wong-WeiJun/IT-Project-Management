@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from sqlalchemy.orm import Session
 from database import get_db, Base, engine
 import models
-from routers import incidents, requests
+from routers import incidents, requests, personnel
 
 
 @asynccontextmanager
@@ -22,6 +22,7 @@ app = FastAPI(
 
 app.include_router(incidents.router)
 app.include_router(requests.router)
+app.include_router(personnel.router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -49,6 +50,16 @@ def requests_page():
 @app.get("/requests_detail.html")
 def requests_detail_page():
     return FileResponse("templates/requests_detail.html")
+
+
+@app.get("/personnel.html")
+def personnel_page():
+    return FileResponse("templates/personnel.html")
+
+
+@app.get("/personnel_detail.html")
+def personnel_detail_page():
+    return FileResponse("templates/personnel_detail.html")
 
 
 @app.get("/health")
