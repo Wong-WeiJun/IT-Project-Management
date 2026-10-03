@@ -109,3 +109,29 @@ class PersonnelResponse(PersonnelBase):
     incident_title: Optional[str] = None
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class ShelterBase(BaseModel):
+    name: str
+    location: str
+    capacity: int
+    status: Literal["OPEN", "CLOSED", "FULL"] = "OPEN"
+
+
+class ShelterCreate(ShelterBase):
+    pass
+
+
+class ShelterUpdate(BaseModel):
+    name: Optional[str] = None
+    location: Optional[str] = None
+    capacity: Optional[int] = None
+    status: Optional[Literal["OPEN", "CLOSED", "FULL"]] = None
+    occupied: Optional[int] = None
+
+
+class ShelterResponse(ShelterBase):
+    name: str
+    capacity: int
+    occupied: int
+    status: Literal["OPEN", "CLOSED", "FULL"] = "OPEN"
