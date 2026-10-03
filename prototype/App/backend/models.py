@@ -71,3 +71,14 @@ class Personnel(Base):
     status = Column(String, default="AVAILABLE", nullable=False)
 
     incident = relationship("Incident", back_populates="personnel")
+
+
+class Shelter(Base):
+    __tablename__ = "shelters"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    name = Column(String, nullable=False)
+    location = Column(String, nullable=False)
+    capacity = Column(String, nullable=False)
+    occupied = Column(String, default="0", nullable=False)
+    status = Column(String, default="OPEN", nullable=False)
