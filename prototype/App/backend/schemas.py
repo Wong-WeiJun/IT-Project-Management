@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from typing import Literal, Optional
 from zoneinfo import ZoneInfo
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 def get_datetime() -> datetime:
@@ -119,7 +119,13 @@ class ShelterBase(BaseModel):
 
 
 class ShelterCreate(ShelterBase):
-    pass
+    occupied: int = 0
+
+    @model_validator(mode="after")
+    def check_capacity(self) -> "ShelterCreate":
+        if self.occupied > self.capacity:
+            raise ValueError("Occupied cannot exceed capacity")
+        return self
 
 
 class ShelterUpdate(BaseModel):
@@ -129,9 +135,21 @@ class ShelterUpdate(BaseModel):
     status: Optional[Literal["OPEN", "CLOSED", "FULL"]] = None
     occupied: Optional[int] = None
 
+    @model_validator(mode="after")
+    def check_capacity(self) -> "ShelterUpdate":
+        if self.capacity is not None and self.occupied is not None:
+            if self.occupied > self.capacity:
+                raise ValueError("Occupied cannot exceed capacity")
+        return self
+
 
 class ShelterResponse(ShelterBase):
-    name: str
-    capacity: int
     occupied: int
-    status: Literal["OPEN", "CLOSED", "FULL"] = "OPEN"
+
+    @model_validator(mode="after")
+    def check_capacity(self) -> "ShelterResponse":
+        if self.occupied > self.capacity:
+            raise ValueError(
+                f"Occupied count ({self.occupied}) cannot exceed capacity ({self.capacity})"
+            )
+        return self
