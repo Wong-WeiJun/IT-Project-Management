@@ -59,6 +59,15 @@ def update_shelter(
         )
 
     update_data = shelter_update.model_dump(exclude_unset=True)
+
+    capacity = update_data.get("capacity", shelter.capacity)
+    occupied = update_data.get("occupied", shelter.occupied)
+
+    if occupied > capacity:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Occupied count ({occupied}) cannot exceed capacity ({capacity})",
+        )
     for key, value in update_data.items():
         setattr(shelter, key, value)
 
