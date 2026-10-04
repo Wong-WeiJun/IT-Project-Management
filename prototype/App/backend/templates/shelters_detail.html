@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shelter Detail</title>
+  <style>
+    #view-section p { margin: 0.4rem 0; }
+    #capacity-bar { font-family: monospace; font-size: 1.2rem; letter-spacing: 1px; }
+    #edit-section {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid;
+      max-width: 400px;
+    }
+    #edit-section label { display: block; margin-top: 0.5rem; }
+    #edit-section input,
+    #edit-section select,
+    #edit-section textarea { width: 100%; padding: 0.3rem; box-sizing: border-box; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; margin-right: 0.5rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <p><a href="/shelters.html">&larr; Back to Shelters</a></p>
+
+  <div id="shelter-detail">
+    <div id="view-section">
+      <h1 id="detail-name"></h1>
+      <p><strong>Location:</strong> <span id="detail-location"></span></p>
+      <p><strong>Status:</strong> <span id="detail-status"></span></p>
+
+      <p id="capacity-text"></p>
+      <div id="capacity-bar"></div>
+
+      <button id="edit-btn">Edit</button>
+    </div>
+
+    <div id="edit-section">
+      <h2>Edit Shelter</h2>
+      <form id="edit-form">
+        <label for="edit-name">Name</label>
+        <input type="text" id="edit-name" required>
+
+        <label for="edit-location">Location</label>
+        <input type="text" id="edit-location" required>
+
+        <label for="edit-capacity">Capacity</label>
+        <input type="number" id="edit-capacity" min="0" required>
+
+        <label for="edit-occupied">Occupied</label>
+        <input type="number" id="edit-occupied" min="0" required>
+
+        <label for="edit-status">Status</label>
+        <select id="edit-status">
+          <option value="OPEN">OPEN</option>
+          <option value="CLOSED">CLOSED</option>
+          <option value="FULL">FULL</option>
+        </select>
+
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/js/shelters.js"></script>
+</body>
+</html>

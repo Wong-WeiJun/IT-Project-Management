@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from sqlalchemy import Column, String, DateTime, ForeignKey
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -71,3 +71,14 @@ class Personnel(Base):
     status = Column(String, default="AVAILABLE", nullable=False)
 
     incident = relationship("Incident", back_populates="personnel")
+
+
+class Shelter(Base):
+    __tablename__ = "shelters"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    name = Column(String, nullable=False)
+    location = Column(String, nullable=False)
+    capacity = Column(Integer, nullable=False)
+    occupied = Column(Integer, default=0, nullable=False)
+    status = Column(String, default="OPEN", nullable=False)
