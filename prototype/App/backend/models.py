@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from sqlalchemy import Column, String, DateTime, ForeignKey
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -79,6 +79,6 @@ class Shelter(Base):
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     name = Column(String, nullable=False)
     location = Column(String, nullable=False)
-    capacity = Column(String, nullable=False)
-    occupied = Column(String, default="0", nullable=False)
+    capacity = Column(Integer, nullable=False)
+    occupied = Column(Integer, default=0, nullable=False)
     status = Column(String, default="OPEN", nullable=False)

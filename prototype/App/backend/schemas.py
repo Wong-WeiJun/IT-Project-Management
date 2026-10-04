@@ -144,7 +144,10 @@ class ShelterUpdate(BaseModel):
 
 
 class ShelterResponse(ShelterBase):
+    id: str
     occupied: int
+
+    model_config = ConfigDict(from_attributes=True)
 
     @model_validator(mode="after")
     def check_capacity(self) -> "ShelterResponse":
