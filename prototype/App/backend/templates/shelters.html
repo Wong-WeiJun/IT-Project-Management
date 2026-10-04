@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shelters</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid; padding: 0.5rem; text-align: left; }
+    #create-form-section {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid;
+      max-width: 400px;
+    }
+    #create-form-section label { display: block; margin-top: 0.5rem; }
+    #create-form-section input,
+    #create-form-section select,
+    #create-form-section textarea { width: 100%; padding: 0.3rem; box-sizing: border-box; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Emergency Shelters</h1>
+
+  <button id="show-form-btn">+ Add Shelter</button>
+
+  <div id="create-form-section">
+    <h2>Add Shelter</h2>
+    <form id="create-form">
+      <label for="name">Name</label>
+      <input type="text" id="name" required>
+
+      <label for="location">Location</label>
+      <input type="text" id="location" required>
+
+      <label for="capacity">Capacity</label>
+      <input type="number" id="capacity" min="0" required>
+
+      <label for="occupied">Occupied</label>
+      <input type="number" id="occupied" min="0" value="0">
+
+      <label for="status">Status</label>
+      <select id="status">
+        <option value="OPEN">OPEN</option>
+        <option value="CLOSED">CLOSED</option>
+        <option value="FULL">FULL</option>
+      </select>
+
+      <button type="submit">Add Shelter</button>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Shelter</th>
+        <th>Capacity</th>
+        <th>Occupied</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="shelter-list">
+    </tbody>
+  </table>
+
+  <script src="/static/js/shelters.js"></script>
+</body>
+</html>
