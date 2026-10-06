@@ -193,3 +193,15 @@ class ResourceAllocate(BaseModel):
         if self.quantity <= 0:
             raise ValueError("Quantity must be greater than zero")
         return self
+
+
+class AuditLogResponse(BaseModel):
+    id: str
+    timestamp: datetime
+    user: str
+    action: str
+    entity_type: str
+    entity_id: str
+    description: str
+
+    model_config = ConfigDict(from_attributes=True)
