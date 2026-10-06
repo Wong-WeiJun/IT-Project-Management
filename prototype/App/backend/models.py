@@ -92,3 +92,15 @@ class Resource(Base):
     category = Column(String, nullable=False)
     quantity_total = Column(Integer, nullable=False)
     quantity_available = Column(Integer, nullable=False)
+
+
+class AuditLog(Base):
+    __tablename__ = "audit_logs"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    timestamp = Column(DateTime(timezone=True), default=get_datetime, nullable=False)
+    user = Column(String, default="Admin", nullable=False)
+    action = Column(String, nullable=False)
+    entity_type = Column(String, nullable=False)
+    entity_id = Column(String, nullable=False)
+    description = Column(String, nullable=False)
