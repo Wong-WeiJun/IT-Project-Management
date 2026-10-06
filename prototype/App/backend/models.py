@@ -82,3 +82,13 @@ class Shelter(Base):
     capacity = Column(Integer, nullable=False)
     occupied = Column(Integer, default=0, nullable=False)
     status = Column(String, default="OPEN", nullable=False)
+
+
+class Resource(Base):
+    __tablename__ = "resources"
+
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    name = Column(String, nullable=False)
+    category = Column(String, nullable=False)
+    quantity_total = Column(Integer, nullable=False)
+    quantity_available = Column(Integer, nullable=False)

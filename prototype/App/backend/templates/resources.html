@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resources</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid; padding: 0.5rem; text-align: left; }
+    #create-form-section, #allocate-section {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid;
+      max-width: 400px;
+    }
+    #create-form-section label, #allocate-section label { display: block; margin-top: 0.5rem; }
+    #create-form-section input, #create-form-section select,
+    #allocate-section input, #allocate-section select { width: 100%; padding: 0.3rem; box-sizing: border-box; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Resources</h1>
+
+  <button id="show-form-btn">+ Add Resource</button>
+
+  <div id="create-form-section">
+    <h2>Add Resource</h2>
+    <form id="create-form">
+      <label for="name">Name</label>
+      <input type="text" id="name" required>
+
+      <label for="category">Category</label>
+      <input type="text" id="category" required>
+
+      <label for="quantity_total">Quantity Total</label>
+      <input type="number" id="quantity_total" min="0" required>
+
+      <button type="submit">Add Resource</button>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Resource</th>
+        <th>Total</th>
+        <th>Available</th>
+        <th>Allocated</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="resource-list">
+    </tbody>
+  </table>
+
+  <div id="allocate-section">
+    <h2>Allocate Resource</h2>
+    <form id="allocate-form">
+      <label>Resource</label>
+      <p id="allocate-resource-name"></p>
+
+      <label for="allocate-quantity">Quantity</label>
+      <input type="number" id="allocate-quantity" min="1" required>
+
+      <label for="allocate-incident">Incident</label>
+      <select id="allocate-incident" required></select>
+
+      <button type="submit">Allocate</button>
+    </form>
+  </div>
+
+  <script src="/static/js/resources.js"></script>
+</body>
+</html>
