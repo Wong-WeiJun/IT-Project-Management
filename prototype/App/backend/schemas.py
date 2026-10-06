@@ -156,3 +156,40 @@ class ShelterResponse(ShelterBase):
                 f"Occupied count ({self.occupied}) cannot exceed capacity ({self.capacity})"
             )
         return self
+
+
+class ResourceBase(BaseModel):
+    name: str
+    category: str
+    quantity_total: int
+
+
+class ResourceCreate(ResourceBase):
+    quantity_available: Optional[int] = None
+
+    @model_validator(mode="after")
+    def default_available(self) -> "ResourceCreate":
+        if self.quantity_available is None:
+            self.quantity_available = self.quantity_total
+        if self.quantity_available > self.quantity_total:
+            raise ValueError("Available quantity cannot exceed total quantity")
+        return self
+
+
+class ResourceResponse(ResourceBase):
+    id: str
+    quantity_available: int
+    quantity_allocated: int
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class ResourceAllocate(BaseModel):
+    quantity: int
+    incident_id: str
+
+    @model_validator(mode="after")
+    def positive_quantity(self) -> "ResourceAllocate":
+        if self.quantity <= 0:
+            raise ValueError("Quantity must be greater than zero")
+        return self
