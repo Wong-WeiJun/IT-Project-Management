@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 import models
 import schemas
+from audit_logger import log_action
 
 router = APIRouter(prefix="/api/requests", tags=["requests"])
 
@@ -39,6 +40,18 @@ def create_request(
     db.add(new_request)
     db.commit()
     db.refresh(new_request)
+
+    log_action(
+        db,
+        action="Created Request",
+        entity_type="Request",
+        entity_id=new_request.id,
+        description=(
+            f"Created request from {new_request.requester_name} "
+            f'for "{new_request.incident.title}"'
+        ),
+    )
+
     return new_request
 
 
