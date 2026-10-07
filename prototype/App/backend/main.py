@@ -25,6 +25,7 @@ app.include_router(requests.router)
 app.include_router(personnel.router)
 app.include_router(shelter.router)
 app.include_router(resources.router)
+app.include_router(audit.router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
