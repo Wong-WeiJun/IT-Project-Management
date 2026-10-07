@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 import models
 import schemas
+from audit_logger import log_action
 
 router = APIRouter(prefix="/api/personnel", tags=["personnel"])
 
@@ -45,6 +46,18 @@ def create_personnel(
     db.add(new_personnel)
     db.commit()
     db.refresh(new_personnel)
+
+    if new_personnel.assigned_incident_id:
+        log_action(
+            db,
+            action="Assigned Personnel",
+            entity_type="Personnel",
+            entity_id=new_personnel.id,
+            description=(
+                f'Assigned {new_personnel.name} to "{new_personnel.incident.title}"'
+            ),
+        )
+
     return _with_incident_title(new_personnel)
 
 
@@ -70,4 +83,14 @@ def update_personnel(
 
     db.commit()
     db.refresh(personnel)
+
+    if "assigned_incident_id" in update_data and personnel.assigned_incident_id:
+        log_action(
+            db,
+            action="Assigned Personnel",
+            entity_type="Personnel",
+            entity_id=personnel.id,
+            description=f'Assigned {personnel.name} to "{personnel.incident.title}"',
+        )
+
     return _with_incident_title(personnel)

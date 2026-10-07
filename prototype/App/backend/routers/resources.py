@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 import models
 import schemas
+from audit_logger import log_action
 
 router = APIRouter(prefix="/api/resources", tags=["resources"])
 
@@ -74,6 +75,7 @@ def allocate_resource(
             detail=f"Incident with ID {allocation.incident_id} not found",
         )
 
+    # 7.4 - never allow an allocation greater than what's available
     if allocation.quantity > resource.quantity_available:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -86,5 +88,16 @@ def allocate_resource(
     resource.quantity_available -= allocation.quantity
     db.commit()
     db.refresh(resource)
+
+    # 8.2 - automatically log the allocation
+    log_action(
+        db,
+        action="Allocated Resource",
+        entity_type="Resource",
+        entity_id=resource.id,
+        description=(
+            f'Allocated {allocation.quantity} {resource.name} to "{incident.title}"'
+        ),
+    )
 
     return _with_allocated(resource)
