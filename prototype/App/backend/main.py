@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from sqlalchemy.orm import Session
 from database import get_db, Base, engine
 import models
-from routers import incidents, requests, personnel, shelter, resources
+from routers import incidents, requests, personnel, shelter, resources, audit
 
 
 @asynccontextmanager
@@ -77,6 +77,11 @@ def shelters_detail_page():
 @app.get("/resources.html")
 def resources_page():
     return FileResponse("templates/resources.html")
+
+
+@app.get("/audit.html")
+def audit_page():
+    return FileResponse("templates/audit.html")
 
 
 @app.get("/health")

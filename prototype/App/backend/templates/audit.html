@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audit History</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid; padding: 0.5rem; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Audit History</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>User</th>
+        <th>Action</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody id="audit-list">
+    </tbody>
+  </table>
+
+  <script src="/static/js/audit.js"></script>
+</body>
+</html>
