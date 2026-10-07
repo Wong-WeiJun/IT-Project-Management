@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <style>
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .card {
+      border: 1px solid;
+      padding: 1rem;
+      flex: 1;
+      min-width: 180px;
+    }
+    .card h3 { margin: 0 0 0.5rem 0; font-size: 0.95rem; }
+    .big-number { font-size: 2.2rem; font-weight: bold; margin: 0; }
+    .capacity-bar { font-family: monospace; font-size: 1.2rem; letter-spacing: 1px; margin-top: 0.4rem; }
+    .card ul { margin: 0; padding-left: 1.2rem; }
+    table { border-collapse: collapse; width: 100%; margin-top: 0.5rem; }
+    th, td { border: 1px solid; padding: 0.5rem; text-align: left; }
+    #recent-activity-list { list-style: none; padding: 0; margin-top: 0.5rem; }
+    #recent-activity-list li { padding: 0.3rem 0; border-bottom: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>Emergency Support Coordination System</h1>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Active Incidents</h3>
+      <p class="big-number" id="active-incidents-count">-</p>
+    </div>
+    <div class="card">
+      <h3>Open Requests</h3>
+      <p class="big-number" id="open-requests-count">-</p>
+    </div>
+    <div class="card">
+      <h3>Available Personnel</h3>
+      <p class="big-number" id="available-personnel-count">-</p>
+    </div>
+    <div class="card">
+      <h3>Available Resources</h3>
+      <p class="big-number" id="available-resources-count">-</p>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Shelter Capacity</h3>
+      <p id="shelter-capacity-text"></p>
+      <div id="shelter-capacity-bar" class="capacity-bar"></div>
+    </div>
+    <div class="card">
+      <h3>High Priority Requests</h3>
+      <ul id="high-priority-list"></ul>
+    </div>
+  </div>
+
+  <h2>Active Incidents</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Incident</th>
+        <th>Location</th>
+        <th>Severity</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="active-incidents-table">
+    </tbody>
+  </table>
+
+  <h2>Recent Activity</h2>
+  <ul id="recent-activity-list"></ul>
+
+  <script src="/static/js/sidebar.js"></script>
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
