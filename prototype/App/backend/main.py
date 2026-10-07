@@ -32,7 +32,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 def home():
-    return FileResponse("templates/incidents.html")
+    return FileResponse("templates/dashboard.html")
 
 
 @app.get("/incidents.html")
@@ -83,6 +83,11 @@ def resources_page():
 @app.get("/audit.html")
 def audit_page():
     return FileResponse("templates/audit.html")
+
+
+@app.get("/dashboard.html")
+def dashboard_page():
+    return FileResponse("templates/dashboard.html")
 
 
 @app.get("/health")
