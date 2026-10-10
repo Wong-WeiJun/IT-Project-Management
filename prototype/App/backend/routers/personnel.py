@@ -31,7 +31,7 @@ def get_personnel_by_id(personnel_id: str, db: Annotated[Session, Depends(get_db
     if not personnel:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"personnel with ID {personnel_id} not found",
+            detail=f"Personnel with ID {personnel_id} not found",
         )
     return _with_incident_title(personnel)
 
