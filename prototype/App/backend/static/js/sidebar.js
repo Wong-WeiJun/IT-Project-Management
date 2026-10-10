@@ -61,7 +61,7 @@ function buildSidebar() {
     const nav = document.createElement("nav");
     nav.id = "app-sidebar";
     const activeKey = currentSectionKey();
-    let html = `<div class="sidebar-title">ESCS</div>`;
+    let html = `<div class="sidebar-title">GLIZZY ESCS</div>`;
     for (let i = 0; i < sidebarLinks.length; i++) {
         const link = sidebarLinks[i];
         const activeClass = link.key === activeKey ? "active" : "";
