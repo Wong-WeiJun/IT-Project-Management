@@ -15,7 +15,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Emergency Support Coordination System",
+    title="Glizzy Emergency Support Coordination System",
     version="1.0.0",
     lifespan=lifespan,
 )
