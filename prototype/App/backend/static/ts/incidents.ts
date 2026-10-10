@@ -15,7 +15,7 @@ async function loadIncidents() {
         <td>${data[i].location}</td>
         <td>${data[i].severity}</td>
         <td>${data[i].status}</td>
-        <td><a href="incident_detail.html?id=${data[i].id}">View</a></td>
+        <td><a href="incidents_detail.html?id=${data[i].id}">View</a></td>
       </tr>`;
   }
   document.getElementById("incident-list").innerHTML = html;
@@ -60,7 +60,7 @@ async function loadAssignedPersonnel(incidentId) {
 
   let html = "";
   for (let i = 0; i < assigned.length; i++) {
-    html += `<li><strong>${assigned[i].name}</strong> - ${assigned[i].role} (${assigned[i].phone})</li>`;
+    html += `<li><strong>${assigned[i].name}</strong> - ${assigned[i].role} (${assigned[i].contact})</li>`;
   }
   listElem.innerHTML = html;
 }
