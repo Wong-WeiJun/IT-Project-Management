@@ -5,15 +5,7 @@
 ```text
 IT-Project-Management/
 ├── README.md
-├── meetings/
-│   └── Group_Checklist.docx
-├── project-management/
-│   ├── xxx
-├── prototype/
-├── ui/
-└── evidence/
-    ├── screenshots/
-    └── testing/
+└── prototype/
 
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
