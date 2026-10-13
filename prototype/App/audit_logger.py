@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 
 import models
+from auth import current_username
 
 DEFAULT_USER = "Admin"
 
@@ -11,10 +12,10 @@ def log_action(
     entity_type: str,
     entity_id: str,
     description: str,
-    user: str = DEFAULT_USER,
+    user: str | None = None,
 ) -> None:
     entry = models.AuditLog(
-        user=user,
+        user=user or current_username.get() or DEFAULT_USER,
         action=action,
         entity_type=entity_type,
         entity_id=entity_id,
