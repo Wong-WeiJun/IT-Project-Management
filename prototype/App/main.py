@@ -1,10 +1,12 @@
-from fastapi import FastAPI, APIRouter, Depends
+from fastapi import FastAPI, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 from sqlalchemy.orm import Session
+
 from database import get_db, Base, engine
 import models
+from auth import AuthMiddleware, router as auth_router
 from routers import incidents, requests, personnel, shelter, resources, audit
 
 
@@ -20,6 +22,9 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+app.add_middleware(AuthMiddleware)
+
+app.include_router(auth_router)
 app.include_router(incidents.router)
 app.include_router(requests.router)
 app.include_router(personnel.router)
@@ -83,6 +88,16 @@ def resources_page():
 @app.get("/audit.html")
 def audit_page():
     return FileResponse("templates/audit.html")
+
+
+@app.get("/login.html")
+def login_page():
+    return FileResponse("templates/login.html")
+
+
+@app.get("/forbidden.html")
+def forbidden_page():
+    return FileResponse("templates/forbidden.html")
 
 
 @app.get("/dashboard.html")
