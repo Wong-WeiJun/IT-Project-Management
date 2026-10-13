@@ -1,11 +1,11 @@
 const sidebarLinks = [
-  { key: "dashboard", label: "Dashboard", href: "/dashboard.html" },
-  { key: "incidents", label: "Incidents", href: "/incidents.html" },
-  { key: "requests", label: "Requests", href: "/requests.html" },
-  { key: "personnel", label: "Personnel", href: "/personnel.html" },
-  { key: "shelters", label: "Shelters", href: "/shelters.html" },
-  { key: "resources", label: "Resources", href: "/resources.html" },
-  { key: "audit", label: "Audit Log", href: "/audit.html" }
+  { key: "dashboard", label: "Dashboard", href: "/dashboard.html", adminOnly: false },
+  { key: "incidents", label: "Incidents", href: "/incidents.html", adminOnly: false },
+  { key: "requests", label: "Requests", href: "/requests.html", adminOnly: false },
+  { key: "personnel", label: "Personnel", href: "/personnel.html", adminOnly: false },
+  { key: "shelters", label: "Shelters", href: "/shelters.html", adminOnly: false },
+  { key: "resources", label: "Resources", href: "/resources.html", adminOnly: false },
+  { key: "audit", label: "Audit Log", href: "/audit.html", adminOnly: true }
 ];
 
 function currentSectionKey(): string {
@@ -14,7 +14,14 @@ function currentSectionKey(): string {
   return path.replace("/", "").replace("_detail", "").replace(".html", "");
 }
 
-function buildSidebar() {
+async function fetchCurrentUser(): Promise<{ username: string; role: string } | null> {
+  const res = await fetch("/api/auth/me");
+  if (!res.ok) return null;
+  return res.json();
+}
+
+async function buildSidebar() {
+  const user = await fetchCurrentUser();
   const style = document.createElement("style");
   style.textContent = `
     #app-sidebar {
@@ -33,6 +40,10 @@ function buildSidebar() {
       padding: 0 1rem 1rem 1rem;
       font-weight: bold;
       font-size: 0.9rem;
+    }
+    #app-sidebar .sidebar-user {
+      padding: 0 1rem 1rem 1rem;
+      font-size: 0.8rem;
     }
     #app-sidebar button {
       display: block;
@@ -63,13 +74,18 @@ function buildSidebar() {
   nav.id = "app-sidebar";
 
   const activeKey = currentSectionKey();
+  const links = sidebarLinks.filter(link => !link.adminOnly || (user && user.role === "admin"));
 
   let html = `<div class="sidebar-title">GLIZZY ESCS</div>`;
-  for (let i = 0; i < sidebarLinks.length; i++) {
-    const link = sidebarLinks[i];
+  if (user) {
+    html += `<div class="sidebar-user">${user.username} (${user.role})</div>`;
+  }
+  for (let i = 0; i < links.length; i++) {
+    const link = links[i];
     const activeClass = link.key === activeKey ? "active" : "";
     html += `<button class="${activeClass}" onclick="window.location.href='${link.href}'">${link.label}</button>`;
   }
+  html += `<button onclick="window.location.href='/logout'">Log out</button>`;
   nav.innerHTML = html;
 
   document.body.prepend(nav);

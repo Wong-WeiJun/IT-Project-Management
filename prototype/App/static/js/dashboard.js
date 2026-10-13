@@ -9,14 +9,18 @@ function buildDashboardCapacityBar(occupied, capacity, width = 20) {
     return "█".repeat(filled) + "░".repeat(width - filled);
 }
 async function loadDashboard() {
-    const [incidents, requests, personnel, shelters, resources, auditLog] = await Promise.all([
+    const [incidents, requests, personnel, shelters, resources, me] = await Promise.all([
         fetch("/api/incidents/").then(r => r.json()),
         fetch("/api/requests/").then(r => r.json()),
         fetch("/api/personnel/").then(r => r.json()),
         fetch("/api/shelters/").then(r => r.json()),
         fetch("/api/resources/").then(r => r.json()),
-        fetch("/api/audit/").then(r => r.json())
+        fetch("/api/auth/me").then(r => r.json())
     ]);
+    let auditLog = [];
+    if (me && me.role === "admin") {
+        auditLog = await fetch("/api/audit/").then(r => r.json());
+    }
     const activeIncidents = incidents.filter(i => i.status === "ACTIVE");
     document.getElementById("active-incidents-count").innerText = String(activeIncidents.length);
     const openRequests = requests.filter(r => r.status === "OPEN");
@@ -46,6 +50,10 @@ async function loadDashboard() {
       </tr>`;
     }
     document.getElementById("active-incidents-table").innerHTML = incHtml;
+    if (!me || me.role !== "admin") {
+        document.getElementById("recent-activity-list").innerHTML = "<li>Recent activity is limited to admin accounts.</li>";
+        return;
+    }
     const recent = auditLog.slice(0, 5);
     let activityHtml = "";
     for (let i = 0; i < recent.length; i++) {
